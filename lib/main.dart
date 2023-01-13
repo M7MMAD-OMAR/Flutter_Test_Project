@@ -29,15 +29,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var textFieldBirthYear = TextEditingController();
-  dynamic birthYear = 0;
+  Widget BirthYear = Text("");
 
   void getAge() => {
         setState(() {
-          birthYear = num.parse(textFieldBirthYear.text.toString());
-          if (birthYear < 1900 || birthYear > DateTime.now().year) {
-            birthYear = "Error: Birth Year must between 1900 and now year";
+          int by = num.parse(textFieldBirthYear.text.toString()).toInt();
+          if (by < 1900 || by > DateTime.now().year) {
+            BirthYear =
+                Text("Birth Year must between 1900 and now year");
           } else {
-            birthYear = DateTime.now().year - birthYear;
+            BirthYear = Text("${DateTime.now().year - by}");
           }
         })
       };
@@ -64,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(
             height: 10,
           ),
-          Text("$birthYear"),
+          BirthYear,
         ],
       ),
     );
